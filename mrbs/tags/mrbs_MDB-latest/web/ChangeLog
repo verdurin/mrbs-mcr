@@ -1,0 +1,19 @@
+2003-09-17  Thierry Bothorel <thierry_bo@users.sourceforge.net>
+
+	* add.php, admin.php, auth_ext.inc, auth_imap.inc, auth_ip.inc,
+	  auth_ldap.inc, auth_name.inc, auth_nis.inc, auth_nt.inc,
+	  auth_nw.inc, auth_omni.inc, auth_pop3.inc, day.php, del.php,
+	  del_entry.php, edit_area_room.php, edit_entry.php,
+	  edit_entry_handler.php, escapeshellarg.inc, functions.inc,
+	  grab_globals.inc.php, help.php, index.php, lang.cz, lang.da,
+	  lang.de, lang.en, lang.es, lang.fr, lang.it, lang.ja, lang.nl,
+	  lang.no, lang.pt, lang.sv, lang.zh-tw, mincals.inc, month.php,
+	  mrbs_auth.inc, mrbs_sql.inc, mysql.inc, pgsql.inc, report.php,
+	  search.php, config.inc, config.inc.php, database.inc.php,
+	  fbsql.inc, ibase.inc, mdb.tgz, mssql.inc, oci8.inc,
+	  site_faq.html, site_faq_fr.html, style.inc, trailer.inc,
+	  view_entry.php, week.php
+	  (mrbs_MDB-branch.[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]):
+	  1st commit mrbs_MDB-branch (Files removes, added, modified from
+	  the existing cvs).
+	  

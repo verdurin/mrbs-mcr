@@ -1,0 +1,288 @@
+README.sqlapi     - Database wrappers for MRBS                     2003-09-13
+-----------------------------------------------------------------------------
+MRBS use the cvs version of PEAR::MDB (this means version 1.2+ ), an external
+database abstraction layer.
+
+
+Note for MRBS developer install/update the MDB class.
+
+
+The MDB package is a subset of PEAR, an application framework for PHP. Then it
+is designed to be available for a whole web server and installed through the
+PEAR Package Manager (PPM) to install it into the PEAR framework.
+These packages are installed under the PEAR directory into the PHP
+directory. Then they are available for all others php scripts.
+
+However, we experienced some problems using it this way, as this class is
+actively maintained as well as other PEAR core files, then people using MRBS
+will not use the same version of this class, and this may cause some bugs.
+So we decided to include only the necessary files inside MRBS to be sure all
+users use the same files.
+
+To install/update MDB files in MRBS, developpers need to install the PEAR
+framework on their development computer. To know how to install PEAR and MDB
+on your computer, please read the file PEAR in this directory.
+
+Once PEAR is setup, copy/update the following files from your /php/PEAR/
+directory in MRBS /web/ directory :
+
+- PEAR.php
+- MDB.php
+- MDB directory
+- XML directory
+
+Normally we don't need to edit ourselves these files, as they are externally
+maintained, only update them with newer versions once we have tested them.
+
+Currently (2004-02-28), PEAR files used in MRBS comes from the following
+packages:
+
+PEAR 		1.3			(PEAR.php)
+XML_Parser  1.0.1   	(XML directory)
+MDB			1.2+ (cvs)  (MDB.php and MDB directory)
+
+----------------------------------------------------------------------------
+
+Any contibutor/developer having to add/change MRBS code dealing with the
+database, either for the official code or for personal use should use this
+API for consistency. Documentation can be found at:
+http://pear.php.net/manual/en/package.database.mdb.php
+More information available at: http://www.backendmedia.com/MDB/docs/
+Unfortunately you will have to read both, as neither is complete.
+
+This package supports one single connection to a database, because the
+database connection handle is stored in a global variable. It supports
+multiple pending results for each connection. It can be configured to
+use PHP persistent (pooled) database connections, or normal (single use)
+connections.
+
+CAUTION: Before using PHP persistent database connections with PostgreSQL,
+be sure your PostgreSQL postmaster can support enough backends. In theory,
+and to be completely safe, it needs to be able to support at least as many
+concurrent connections as your Apache "MaxClients" setting times the number
+of unique persistent connection strings (PostgreSQL conninfo's, unique
+combinations of user/password/database) implemented on your site. Note that
+the default for PostgreSQL is a maximum of 32 connections, and the default
+for Apache MaxClients is 150. If you do not want to use persistent
+connections, set $db_nopersist as described below.
+
+-----------------------------------------------------------------------------
+
+PEAR MDB is a merge of the PEAR DB and Metabase php classes.
+
+It provides a common API for all supported RDBMS. The main difference to most
+other DB abstraction packages is that MDB goes much further to ensure
+portability. Among other things MDB features:
+
+* An OO-style query API
+* A DSN (data source name) or array format for specifying database servers
+* Datatype abstraction and on demand datatype conversion
+* Portable error codes
+* Sequential and non sequential row fetching as well as bulk fetching
+* Ordered array and associative array for the fetched rows
+* Prepare/execute (bind) emulation
+* Sequence emulation
+* Replace emulation
+* Limited Subselect emulation
+* Row limit support
+* Transactions support
+* Large Object support
+* Index/Unique support
+* Module Framework to load advanced functionality on demand
+* Table information interface
+* RDBMS management methods (creating, dropping, altering)
+* RDBMS independent xml based schema definition management
+* Altering of a DB from a changed xml schema
+* Reverse engineering of xml schemas from an existing DB (currently only MySQL)
+* Full integration into the PEAR Framework
+* Wrappers for the PEAR DB and Metabase APIs
+* PHPDoc API documentation
+
+Currently supported RDBMS:
+MySQL
+PostGreSQL
+Oracle
+Frontbase
+Querysim
+Interbase
+Firebird
+MSSQL
+Other soon to follow.
+
+MDB is a package that allows the developers to write database applications in
+PHP that are independent of the DBMS (DataBase Management System).
+The steps that developers have to take to write MDB based applications are
+identical to those that are taken while using the set of native commands that
+are used to talk to each DBMS directly. The main advantage of MDB is that
+developers only need to learn and use one set of commands to implement
+applications that may run with many different DBMS.
+
+Why another database class?
+
+Often, web projects are added to existing IT infrastructures, where the client
+already made a choice of what RDBMS (relational database management system)
+to work with. Even if that is not the case different budgets might affect
+what database you chose for deployment. Finally, you as the developer simply
+might prefer not to lock yourself in with a specific vendor. So far this
+meant to keep multiple versions for each supported database or giving up more
+performance and ease of use than necessary: Enter PEAR MDB.
+
+MDB is a database abstraction layer that aims to make writing RDBMS
+independent PHP application development a straightforward process. Most other
+so called database abstraction layers for PHP only provide a common API for
+all supported databases and only very limited abstraction (mostly only for
+sequences). MDB on the other hand can be used to abstract all data being send
+and received from the database. Even database schemas can be defined in a
+RDBMS independent format. But it does this while retaining a high level of
+performance and ease of use. This was achieved by closely examining two
+popular database abstraction layers, PEAR DB and Metabase, and merging them.
+But during the merging the opportunity was also used to clean up their merged
+APIs as well as any performance hindering design patterns
+
+What does MDB do for you?
+
+MDB combines most of the features of PEAR DB and Metabase. Actually, the only
+feature that is missing is PEAR DB's feature of returning an object as a
+result set. This feature was dropped because the feature's usage never became
+abundant but the performance penalty was quite apparent. A lot of development
+time was spend on making the API as intuitive as possible as well. Finally,
+MDB provides this functionality at a very high level of performance that is at
+least as fast as PEAR DB and much faster than Metabase. Here is the list of
+the most important features:
+
+- OO-style API
+- prepared queries emulation
+- full data type abstraction for all data passed to and from the database
+  (including LOB support)
+- transaction support
+- database/table/index/sequence creation/dropping/altering
+- RDBMS independent database schema management
+- Integrated into the PEAR framework (PEAR Installer, PEAR error handling etc.)
+
+
+-----------------------------------------------------------------------------
+
+As this database wrapper does not handled all functions used in mrbs, to use
+this package you have to include your database specific phptype.inc file after
+defining the following variables:
+
+     $db_host = The hostname of the database server (or Oracle SID)
+     $db_port = The port of the database server if not the default port
+     $db_login = The username to use when connecting to the database
+     $db_password = The database account password
+     $db_database = The database name
+     $db_nopersist = FALSE to use persistent connections
+     $db_protocol = The communication protocol to use (i.e tcp, unix etc.)
+
+Optionally, you can define:
+
+     $db_nopersist = TRUE;
+		if you do not want to use persistent connections.
+     other DBMS specific options
+
+After your script includes the file, it will be connected to the database.
+If an error occurs while trying to connect, a message will be output
+followed by a PHP exit. (Failure to connect to the database is the only
+reason the functions defined here will output an error message and exit.)
+
+The way MRBS uses this is to define a configuration file config.inc.php with
+the above variables plus:
+     $dbsys = "pgsql";  //  or "mysql" , "oci8" and so on.
+Then, each PHP script which wants to connect to the database starts with:
+     include "config.inc.php";
+     require_once("database.inc.php");
+     include "$dbsys.inc";
+
+-----------------------------------------------------------------------------
+Notes on improving SQL portability:
+
+  + Use standard SQL-92 as much as possible.
+  + Where it is not possible to use SQL-92, use or implement an sql_syntax_*
+    function which hides the database differences (see below).
+  + Don't use SQL-92 reserved words as column or table names.
+  + Use PHP functions rather than database functions where practical.
+  + Don't reply on specific formats for output of DATETIME types.
+  + Don't quote numeric type values in SQL statements.
+
+SQL-92 standard things to avoid because they cause trouble in MySQL:
+  + Double quoted identifiers: SELECT "MY COLUMN" from "MY TABLE"...
+  + The string concatenation operator ||
+  + Subselects (although MDB provide an emulation function for this)
+
+SQL-92 standard things to avoid because they cause trouble in PostgreSQL:
+  + Outer joins.
+  + "table1 JOIN table2" syntax; use WHERE clause joins instead.
+
+Non-standard features used, available in both PostgreSQL and MySQL (this
+information is provided for anyone attempting to port MRBS to another
+database system):
+  + Escaping quoted strings. The SQL-92 standard says to double embedded
+    single quotes, and that's the only escaping used or defined. So:
+               insert into mytable values ('CAN''T');
+    But both MySQL and PostgreSQL support backslash-escaping, which is
+    easier to do in PHP, so I have not attempted to wrap database string
+    quoting.
+  + MySQL implicitly assigns "DEFAULT current_timestamp" to a timestamp
+    column; this must be done explicitly in other database systems.
+  + The column called TIMESTAMP is not legal in SQL-92. It would be legal
+    if double-quoted in SQL statements, but MySQL doesn't like that.
+    Changing the column name would break existing databases, and it turns
+    out both PostgreSQL and MySQL accept this, so it has been kept.
+  + Auto-commit is assumed. The database wrappers have
+    autoCommit(FALSE)/commit() calls to
+    bracket transactions, but MRBS generally uses them only to improve
+    performance with grouped inserts/deletes/updates. It is assumed that
+    a single insert/delete/update SQL statement commits right away. If
+    a database doesn't implement this, the MDB wrapper take care of it.
+  + Portable use of auto-incrementing fields (PostgreSQL SERIAL, MySQL
+    AUTO_INCREMENT) does not requires anything, as MDB handle sequence
+    automatically.
+
+-----------------------------------------------------------------------------
+
+The database-independent wrapper functions are documented here:
+
+sql_mutex_lock($name)
+  Acquire a mutual-exclusion lock on the named table. For portability:
+  * This will not lock out SELECTs.
+  * It may lock out DELETE/UPDATE/INSERT or it may not.
+  * It will lock out other callers of this routine with the same name
+    argument (which is the main reason for using it).
+  * It may timeout in 20 seconds and return 0, or may wait forever.
+  * It returns 1 when the lock has been acquired.
+  * Caller must release the lock with sql_mutex_unlock().
+  * Caller must not have more than one mutex lock at any time.
+  You should be sure to release the lock with sql_mutex_unlock() before the
+  script exits, although this function also establishes a shutdown handler to
+  automatically release the lock if the script exits.  (With persistent
+  connections, the locks would not otherwise be released on exit, and a
+  deadlock will occur.)
+  This call effectively calls sql_begin(), so do not use it inside an
+  sql_begin()/sql_end() block, nor use sql_begin() between calls to
+  sql_mutex_lock() and sql_mutex_unlock().
+
+sql_mutex_unlock($name)
+  Release a mutual-exclusion lock on the named table. See sql_mutex_lock().
+  This also effectively calls sql_commit().
+
+sql_version()
+  Return a string identifying the database system and version.
+
+-----------------------------------------------------------------------------
+
+The following sql_syntax_* routines are intended to help you build up SQL
+statements using non-standard features. Each returns a portion of SQL (with
+leading and trailing spaces) which implements the named non-standard feature
+for the selected database.
+
+sql_syntax_caseless_contains($fieldname, $s)
+  Generate a non-standard SQL predicate clause which will be true if the
+  string $s is contained anywhere in the named field, using case insensitive
+  string compare. This uses LIKE or Regular Expression matching, depending
+  on the database system. It handles all quoting on the $s argument of the
+  characters needed by the selected method, so don't call this with an
+  argument which has already been "magic quoted".
+
+-----------------------------------------------------------------------------
+
+$Id$

@@ -1,0 +1,21 @@
+2003-09-27  Thierry Bothorel <thierry_bo@users.sourceforge.net>
+
+	* testdata.php (mrbs_MDB-branch.2): Changes all sql statements to
+	  upper case.
+
+2003-09-27  Thierry Bothorel <thierry_bo@users.sourceforge.net>
+
+	* INSTALL, mrbs_create.php (mrbs_MDB-branch.[2,2]): Doc fix.
+
+2003-09-17  Thierry Bothorel <thierry_bo@users.sourceforge.net>
+
+	* AUTHENTICATION, INSTALL, LANGUAGE, NEWS, PEAR, README,
+	  README.nwauth, README.sqlapi, ROXEN, TODO, UPGRADE,
+	  auth_cookie_ext.inc, auth_ldap.pl, auth_ldapsearch.pl, badpw.pl,
+	  destroy.pg.sql, destroy.php, grant.pg.sql, mrbs.schema.xml,
+	  mrbs_create.php, purge.my.sql, purge.pg.sql, purge.php,
+	  sample-data.sql, tables.my.sql, tables.pg.sql, testdata.php,
+	  upgrade.my.sql, upgrade2.my.sql, upgrade2.pg.sql
+	  (mrbs_MDB-branch.[1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]):
+	  1st commit mrbs_MDB-branch (Files removes, added, modified from
+	  the existing cvs).
