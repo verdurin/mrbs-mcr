@@ -1,0 +1,29 @@
+Upgrade Information for previous releases of MRBS:
+--------------------------------------------------
+
+There was a change to the database schema at version 0.7. See the
+information in INSTALL on using the upgrade.my.sql script.
+
+There have been no database changes from version 0.7, so your current
+database should work just fine. Although, naturally, you should back up
+any data you have before using a new version.
+
+A change in version 1.0-pre1 might affect the appearance of entries in your
+existing database. Prior versions of MRBS did an extra and unnecessary
+level of backslash-escaping on room, area, and entry names and
+descriptions. This applied to certain characters such as single quote
+mark(') and backslash(\). As of version 1.0-pre1, these characters are
+handled correctly. If you see extra backslashes when MRBS displays names or
+descriptions, it is because these are in actually your database.  You can
+edit the entries in MRBS or directly with your database SQL tool, or just
+ignore them.
+
+Upgrading from prior to mrbs 1.0 final
+======================================
+
+Please apply the upgrade2.my.sql (if using MySQL) or the
+the upgrade2.my.sql (if using PostgreSQL) script, which
+adds a new column to the 'mrbs_repeat' table to support
+"n-weekly" repeats.
+
+$Id$
