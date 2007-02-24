@@ -1,5 +1,24 @@
-#!/bin/sh
+#!/usr/bin/perl
 
-cvs2cl.pl --usermap ~/mrbs/usermap-mrbs --no-times --branches --tags --revisions --utc --ignore ChangeLog --follow mrbs-1_2-branch --log-opts '-l' --accum
-cd web
-cvs2cl.pl --usermap ~/mrbs/usermap-mrbs --no-times --branches --tags --revisions --utc --ignore ChangeLog --follow mrbs-1_2-branch --accum
+use FindBin;
+
+my $bindir = $FindBin::Bin;
+
+my $mrbs_dir = shift || ($ENV{HOME}.'/mrbs/mrbs_cvs/branch-1.2/mrbs');
+
+if (! -d $mrbs_dir)
+{
+  die "MRBS sandbox not found, exitting\n";
+}
+
+chdir $mrbs_dir or die "Failed to change dir to sandbox\n";
+
+(system($bindir.'/cvs2cl.pl','--usermap',$bindir.'/usermap-mrbs','--no-times',
+        '--branches','--tags','--revisions','--utc','--ignore','ChangeLog',
+        '--follow','mrbs-1_2-branch','--log-opts','-l','--accum') == 0) or die "Failed to run cvs2cl.pl\n";
+
+chdir 'web';
+
+(system($bindir.'/cvs2cl.pl','--usermap',$bindir.'/usermap-mrbs','--no-times',
+        '--branches','--tags','--revisions','--utc','--ignore','ChangeLog',
+        '--follow','mrbs-1_2-branch','--accum') == 0) or die "Failed to run cvs2cl.pl\n";
