@@ -1,0 +1,5 @@
+#!/bin/sh
+
+cvs2cl.pl --usermap ~/mrbs/usermap-mrbs --no-times --branches --tags --revisions --utc --ignore ChangeLog --follow mrbs-1_2-branch --log-opts '-l' --accum
+cd web
+cvs2cl.pl --usermap ~/mrbs/usermap-mrbs --no-times --branches --tags --revisions --utc --ignore ChangeLog --follow mrbs-1_2-branch --accum
