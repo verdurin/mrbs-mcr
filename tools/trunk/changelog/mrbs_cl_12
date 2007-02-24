@@ -15,10 +15,4 @@ chdir $mrbs_dir or die "Failed to change dir to sandbox\n";
 
 (system($bindir.'/cvs2cl.pl','--usermap',$bindir.'/usermap-mrbs','--no-times',
         '--branches','--tags','--revisions','--utc','--ignore','ChangeLog',
-        '--follow','mrbs-1_2-branch','--log-opts','-l','--accum') == 0) or die "Failed to run cvs2cl.pl\n";
-
-chdir 'web';
-
-(system($bindir.'/cvs2cl.pl','--usermap',$bindir.'/usermap-mrbs','--no-times',
-        '--branches','--tags','--revisions','--utc','--ignore','ChangeLog',
-        '--follow','mrbs-1_2-branch','--accum') == 0) or die "Failed to run cvs2cl.pl\n";
+        '--follow','mrbs-1_2-branch',) == 0) or die "Failed to run cvs2cl.pl\n";

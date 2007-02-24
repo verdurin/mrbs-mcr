@@ -4,7 +4,7 @@ use FindBin;
 
 my $bindir = $FindBin::Bin;
 
-my $mrbs_dir = shift || ($ENV{HOME}.'/mrbs/mrbs_cvs/branch-1.2/mrbs');
+my $mrbs_dir = shift || ($ENV{HOME}.'/mrbs/mrbs_cvs/trunk/mrbs');
 
 if (! -d $mrbs_dir)
 {
@@ -14,11 +14,4 @@ if (! -d $mrbs_dir)
 chdir $mrbs_dir or die "Failed to change dir to sandbox\n";
   
 (system($bindir.'/cvs2cl.pl','--usermap',$bindir.'/usermap-mrbs','--no-times',
-        '--branches','--tags','--revisions','--utc','--ignore','ChangeLog',
-        '--log-opts','-l','--accum') == 0) or die "Failed to run cvs2cl.pl\n";
-
-chdir 'web';
-
-(system($bindir.'/cvs2cl.pl','--usermap',$bindir.'/usermap-mrbs','--no-times',
-        '--branches','--tags','--revisions','--utc','--ignore','ChangeLog',
-        '--accum') == 0) or die "Failed to run cvs2cl.pl\n";
+        '--branches','--tags','--revisions','--utc','--ignore','ChangeLog') == 0) or die "Failed to run cvs2cl.pl\n";
