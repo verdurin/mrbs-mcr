@@ -3,9 +3,29 @@
 <?php
 # get arguments =>  template, input file, output file and title
 
-$src_dir = "/home/jberanek/mrbs/mrbs_cvs/branch-1.2/mrbs";
-$web_dir = "/home/jberanek/mrbs/tt/webpages";
-$templatefile = "/home/jberanek/mrbs/tt/webpages/main.dwt";
+$bin_dir = $_SERVER['argv'][0];
+$bin_dir = preg_replace('/\/[^\/]*$/','',$bin_dir);
+
+if (isset($_SERVER['argv'][1]))
+{
+  $src_dir = $_SERVER['argv'][1];
+}
+else
+{
+  $src_dir = '/home/jberanek/mrbs/mrbs_cvs/branch-1.2/mrbs';
+}
+
+if (isset($_SERVER['argv'][2]))
+{
+  $web_dir = $_SERVER['argv'][2];
+}
+else
+{
+  $web_dir = '.';
+}
+
+$templatefile = $bin_dir.'/main.dwt';
+
 # README
 $to_process[] = array(
                   "$src_dir/README",
@@ -30,9 +50,16 @@ $to_process[] = array(
 # NEWS
 $to_process[] = array(
                   "$src_dir/NEWS",
+                  "$web_dir/NEWS.html",
+                  "NEWS",
+                  "MRBS: NEWS"
+                );
+# NEWS
+$to_process[] = array(
+                  "$src_dir/ChangeLog",
                   "$web_dir/ChangeLog.html",
                   "ChangeLog",
-                  "MRBS: NEWS"
+                  "MRBS: ChangeLog"
                 );
 # LANGUAGE
 $to_process[] = array(
