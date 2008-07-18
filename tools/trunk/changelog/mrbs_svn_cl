@@ -2,4 +2,5 @@
 
 BINDIR=$(dirname $0)
 
-${BINDIR}/../svn2cl/svn2cl.sh --reparagraph -i -a -r HEAD:1 --break-before-msg=2
+${BINDIR}/../svn2cl/svn2cl.sh --reparagraph -i -a -r HEAD:1 --break-before-msg=2 --authors=${BINDIR}/usermap-mrbs
+ 
