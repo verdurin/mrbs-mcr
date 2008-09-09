@@ -17,8 +17,8 @@ if (-d 'mrbs-'.$rel_ver)
   (system('rm','-fr','mrbs-'.$rel_ver) == 0) or die "Failed to clean old export\n";
 }
 
-(system('cvs','-d',':ext:'.$user.'@mrbs.cvs.sourceforge.net:/cvsroot/mrbs',
-       'export','-r',$tag,'-d','mrbs-'.$rel_ver,'mrbs') == 0) or die "Failed to export from CVS\n";
+(system('svn',
+        'export','https://mrbs.svn.sourceforge.net/svnroot/mrbs/mrbs/tags/'.$tag,'mrbs-'.$rel_ver) == 0) or die "Failed to export from SVN\n";
 
 (system('tar','zcvf','mrbs-'.$rel_ver.'.tar.gz','mrbs-'.$rel_ver) == 0) or die "Failed to tar\n";
 
